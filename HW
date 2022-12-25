@@ -1,0 +1,24 @@
+clc
+clear variables;
+close all force;
+
+global u;
+t = (0:0.01:10);
+u = [10; 10];
+x0 = [0; 0; 0];
+
+[t, X] = ode45(@ode, t, x0);
+plot(t, X);
+hold on;
+grid on;
+grid minor;
+
+
+
+function dx = ode(t, x)
+    global u;
+    N = length(t);
+    dx = zeros(length(x), N);
+    dx = [x(2);...
+        (u - x(1)^2 - sqrt(x(1)) - 2*x(2))/2];
+end
